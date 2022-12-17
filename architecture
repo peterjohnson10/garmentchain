@@ -1,0 +1,268 @@
+# Garment Chain Milestone 2
+
+## Title of Milestone: Design and Planning of the Garment Chain Architecture
+
+**Details of what will be delivered in milestone**
+
+Design of the architecture of the Garment Chain. This will include a full architecture of the Garment Chain system and a detailed project roadmap for building the component parts described in this architecture.
+
+**Acceptance criteria: Please enter the specific details on what the deliverable must do to prove this milestone is complete.**
+
+There will be a step-by-step roadmap as well as the document describing how the garment would conceptually be represented on the blockchain and whether it would be represented as
+
+ERC 20 or ERC 721 tokens.
+
+#
+
+
+# Architecture Design
+
+We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched in late 2022). These PBTs will be built using composable NFT contracts following the CEP-47 standard, but in later versions may be updated to follow the newer CEP-78 enhanced NFT standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
+
+# Scenario Overview
+
+We have four contracts, the first three are standard CEP-47 NFT contracts to mint from the sources of inputs and the fourth is the user who is assembling items to make a final product NFT, or PBT. If there are more or less inputs, the number of contracts will vary to match the number of inputs to the goods being produced, with the final contract minting a new NFT that assembles them all, a PBT, using those contracts to verify the source. This final contract which is minting a PBT is required to send certain tokens from the first three contracts, then the fourth contract shall verify the ownership of these tokens by the sender (user). If this cannot be verified, the contract will cancel the minting and creates an error message. If it can be verified, the PBT is minted.
+
+## Example 1
+
+We have ¨body parts NFTs¨ and to mint a full body we need to send left and right leg NFTs from leg contract and left and right arm NFTs form an arm contract and head NFTs from head contract. The user wallet should send all the token IDs from the first three contracts to the fourth contract. After that the fourth contract will verify the ownership of those tokens by the sender wallet then mint the whole body NFT.
+
+
+## Example 2
+
+We make NFTs to mint a PBT of a blue men's formal shirt with a collar and buttons. We have an NFT contract for the source of the fabric this shirt is made from, in this case Egyptian organic cotton from Upper Egypt, near Aswan, Egypt. Another NFT contract is for the indigo used to dye cotton blue. A third is for the sourcing of the buttons, which are from a plastic button producer in Bangladesh. (NOTE: This could be taken a step further, having a composable NFT of the sources of petroleum and other chemicals for the inputs to produce the buttons). An additional NFT contract represents the thread used in sewing the final product, a shirt. A PBT will represent the shirt, which now traces its origins to the four component NFTs which make up this PBT, or composable NFT. Scarabeus Sacer has signed an LOI with Garment Chain, and this is an example based upon their supply chain of how they could implement this project
+
+## Example 3
+
+A unique one-time design is created by a designer in Tunisia, for a fashion show in London, using a mix of second-hand "upcycled" materials as well as woven fabrics from Mali, where the designer previously lived. One NFT is created for each of the upcycled clothing items to be used for inputs into this batch of goods for the upcoming fashion show, but these items come from a second-hand market in Tunis, arriving as goods donated from a variety of European markets. A standard NFT contract comes for the artisanal fabrics coming from Mali, where small groups of individual weavers have a personal relationship with the Tunisia-based designer, who also wants to be certain consumers know the stories of these female weavers who make the inputs for her clothing items. At the initial stage, second-hand clothing would not yet be traced from Europe, but proof could be given that upcycled / recycled clothing was used in the manufacture of these one -of-a-kind garments, with an NFT contract for each of these inputs. AfroFashion has signed an LOI with Garment Chain, and this is an example based upon their supply chain of how they could implement this project.
+
+## Example 4
+
+A Berlin-based designer has production in various countries, but with each manufacturing the goods at all one location, including in many cases a single source for inputs, and then items are shipped to a retail boutique in Berlin, to be sold in-person or through ecommerce sales. An example is a black all-cotton clutch bag made by female artisans in Peru. These 100% cotton bags are made from local cotton produced in the valleys of Northern Peru, and the raw cotton becomes thread and is woven into bags by women from these same communities. Therefore, while we can create NFT contracts for the cotton, and then convert this into a PBT, this is an example where the lack of multiple inputs into the product to track reduces the impact of our new system. In the case where there is one input, cotton, all from the same region or even same community, there is less value to a CEP-47 based contracts for inputs, as we could tell the same story in this case with only on NFT contract, and our system of composable NFTs, or PBTs, does not add the same value in this example as it can in the others. Abury has signed an LOI with Garment Chain, and this is an example based upon their supply chain of how this project would apply, or not apply, in one of their supply chains.
+
+## Example 5
+
+A manufacturer of winter jackets and coats. This use case works better than that of example four because there are multiple components parts, which may be assembled in different points. For example, you may have a polyester shell to the jacket, plastic or metal buttons, plastic or metal zippers, elastic, maybe a draw string of some kind to tighten the hood or waste of the jacket, and some kind of insulation material that fills the inside, such as with a "puffy" winter coat. There also will be the sourcing of threads, dyes, and chemicals used in making and/or waterproofing the garment. In cases of a socially-conscious company like Patagonia, you may also have recycled materials, as they use duck and goose down recycled from old cushions for insulation, where verification of these materials´ "second life" can also be important. In these more complex supply chains, an NFT contract for each of these many components can then be merged into the complete PBT that tells the full story of the sourcing of all the component parts.
+
+## Workflow Flowchart
+ ![](RackMultipart20221217-1-ch923a_html_fa53281032aabd00.png)
+
+#
+
+
+#
+
+
+# Function Explanation
+
+During mint the contract try to transfer the required tokens first if the owner doesn't own the NFTs it will throw an error and end the transaction if the wallets do own the required NFTs it transfer them and will mint the PBT to the recipient the transfer done it will mint the NFT to the recipient.
+
+| fnmint() {
+let recipient = runtime::get\_named\_arg::\<Key\>("recipient");
+let token\_ids = runtime::get\_named\_arg::\<Vec\<TokenId\>\>("token\_ids");
+let token\_metas = runtime::get\_named\_arg::\<Vec\<Meta\>\>("token\_metas");
+let tokens = runtime::get\_named\_arg::\<Vec\<TokenId\>\>("comp\_tokens");
+let recipient2 = runtime::get\_named\_arg::\<Key\>("recipient2");
+
+let contract1 = "contract-9b585124058aa3af7e7884e8c6a97b48a3d2c880b767b4bc001a55717503fe12";
+let contract2 = "contract-5ed2468bd81c9f63c70fd181ce2e98a60e7b4aaeff988b05d3736065a7674036";
+let contract3 = "contract-3a776b821108543434cc86ff2fd48b182216b1d75a0bbcc1938ceb99aa751743";
+
+let method: &str = "transfer";
+
+let args1: RuntimeArgs = runtime\_args! {
+"recipient" =\> recipient2.clone(),
+"token\_ids" =\> vec![tokens[0].clone()],
+ };
+let args2: RuntimeArgs = runtime\_args! {
+"recipient" =\> recipient2.clone(),
+"token\_ids" =\> vec![tokens[1].clone()],
+ };
+let args3: RuntimeArgs = runtime\_args! {
+"recipient" =\> recipient2.clone(),
+"token\_ids" =\> vec![tokens[2].clone()],
+ };
+
+let profile\_contract\_hash1: ContractHash =
+ ContractHash::from\_formatted\_str(&contract1).unwrap\_or\_default();
+let profile\_contract\_hash2: ContractHash =
+ ContractHash::from\_formatted\_str(&contract2).unwrap\_or\_default();
+let profile\_contract\_hash3: ContractHash =
+ ContractHash::from\_formatted\_str(&contract3).unwrap\_or\_default();
+
+ runtime::call\_contract::\<()\>(profile\_contract\_hash1, method, args1);
+ runtime::call\_contract::\<()\>(profile\_contract\_hash2, method, args2);
+ runtime::call\_contract::\<()\>(profile\_contract\_hash3, method, args3);
+
+ NFTToken::default()
+ .mint(recipient, token\_ids, token\_metas)
+ .unwrap\_or\_revert(); |
+| --- |
+
+| } |
+| --- |
+
+Client connection:
+
+CEP-47 client parameters:
+
+Recipient1: NFT's owner(s)
+
+Recipient2: the new owner of NFTs (it should be implemented inside the contract but this is completed from client for now)
+
+Ids: ids token needed to mint form the 4th contract
+
+Comp\_tokens: ids of tokens needed to swap with the 4th contract (the first one refer to the token of the first contract …etc)
+
+| publicasync mint(
+ recipient: CLKeyParameters,
+ recipient2: CLKeyParameters,
+ ids: string[],
+ comp\_tokens: string[],
+ metas: Map\<string, string\>[],
+ paymentAmount: string,
+ deploySender: CLPublicKey,
+ keys?: Keys.AsymmetricKey[]
+ ) {
+const runtimeArgs = RuntimeArgs.fromMap({
+ recipient: CLValueBuilder.key(recipient),
+ recipient2: CLValueBuilder.key(recipient2),
+ token\_ids: CLValueBuilder.list(ids.map(id =\> CLValueBuilder.u256(id))),
+ comp\_tokens: CLValueBuilder.list(comp\_tokens.map(id =\> CLValueBuilder.u256(id))),
+ token\_metas: CLValueBuilder.list(metas.map(meta =\> toCLMap(meta)))
+ });
+
+returnthis.contractClient.callEntrypoint(
+'mint',
+ runtimeArgs,
+ deploySender,
+this.networkName,
+ paymentAmount,
+ keys
+ );
+ }
+
+publicasync mintCopies(
+ recipient: CLKeyParameters,
+ ids: string[],
+ meta: Map\<string, string\>,
+ count: number,
+ paymentAmount: string,
+ deploySender: CLPublicKey,
+ keys?: Keys.AsymmetricKey[]
+ ) {
+const runtimeArgs = RuntimeArgs.fromMap({
+ recipient: CLValueBuilder.key(recipient),
+ token\_ids: CLValueBuilder.list(ids.map(id =\> CLValueBuilder.u256(id))),
+ token\_meta: toCLMap(meta),
+ count: CLValueBuilder.u32(count)
+ });
+
+returnthis.contractClient.callEntrypoint(
+'mint\_copies',
+ runtimeArgs,
+ deploySender,
+this.networkName,
+ paymentAmount,
+ keys
+ );
+ } |
+| --- |
+
+Composable NFTs
+
+This is one novel part of the project, where we will write a smart contract that allows NFTs to be composable. This is important because in real life cases, the garment is made from many different raw materials. Thus, we will need to be able to create a new NFT contract that allows for the NFTs to be combined into a new generative NFT representing the processed raw material, while still providing the traceability of the components.
+
+![](RackMultipart20221217-1-ch923a_html_811a4e5cb4048188.png)
+
+Final Product NFTs
+
+Final product NFT is the fully manufactured NFT representing an actual product. The main use case for it is to manage the ownership of the product and assert the authentication. While the original raw material NFTs will follow the CEP-47 standard, in the Final Product NFTs will be "Physical Backed Tokens" or PBTs, allowing ownership of the physical product to be tied to ownership of the PBT.
+
+![](RackMultipart20221217-1-ch923a_html_60e6a2205800c7e5.png)
+
+The functions and events to be used must be defined and this is done below. These CEP-78 tokens will have similar to ERC-721 functions and this will make it easier to display simple token information.
+
+**List of Functions Related to Composable NFTs:**
+
+Raw Material NFTs
+
+mint\_Raw\_Material
+
+Only registered raw material producers can mint the raw material. The meta data includes:
+
+Material Type
+
+Quantity
+
+Origin
+
+Date
+
+Transfer\_Raw\_Material
+
+Allows the registered raw material producer of transferring the NFT from their wallet to the registered manufacturer.
+
+Compose\_Raw\_Material
+
+Takes in a list of the raw materials and locks them. A new NFT is minted with reference to the locked raw material.
+
+Manufactured NFTs
+
+mint\_Manufactured
+
+Transfer\_Manufactured
+
+Compose\_Manufactured
+
+Final Product NFTs
+
+mint\_Final Product
+
+Transfer\_Final Product
+
+This is basically the sales process. Allowing the current owner to transfer the NFT to the new owner.
+
+name: Used to define the token's name, which other contracts and applications can identify. We will use the name GARM, which will also be its shorthand name or symbol.
+
+symbol: Used to define token's shorthand name or symbol.
+
+totalSupply: This function is used to define the total number of tokens on the blockchain; the supply doesn't have to be constant. We will initially create 10,000,000 tokens and it will be possible for inflation to be created as we are seeking to have the tokens used as a tool to implement traceability of their supply chains, not as a store of value. However, any increase in the number of tokens will need to be approved by the Garment Chain DAO so that existing token holders can approve or disapprove of an action which would dilute their value as well as governance rights.
+
+balanceOf: Returns number of NFTs owned by an address. NFTs will change ownership as the physical items they represent move through the supply chain.
+
+**Ownership Functions**
+
+ownerOf: This function returns the address of the owner of a token. As each CEP 78 token is unique and non-fungible, they are represented on the blockchain by an ID. Other users, contracts, apps can use this ID to determine the owner of the token. This will allow a token to demonstrate clear ownership as it moves from one wallet to another.
+
+approve: This function grants or approves another entity the permission to transfer tokens on the owner's behalf.
+
+takeOwnership: This is an optional function that acts like a withdraw function since an outside party can call it to take tokens out of another user's account. Therefore, takeOwnership can be used when a user has been approved to own a certain amount of tokens and wishes to withdraw said tokens from another user's balance.
+
+transfer: This is another type of transfer function; it allows the owner to transfer the token to another user, just like other digital tokens/coins.
+
+tokenOfOwnerByIndex: This is an optional but recommended function. Each owner can own more than one NFT at the same time. Its unique ID identifies every NFT, and eventually, it can become difficult to keep track of IDs. So the contract stores these IDs in an array and the tokenOfOwnerByIndex function lets us retrieve this information from the array.
+
+Metadata Function
+
+tokenMetadata: This optional feature is an interface that lets us discover a token's metadata or a link to its data.
+
+**List of Events**
+
+Transfer: This event is fired when the ownership of the token changes from one individual to another. It emits the information on which account transferred the token, which account received the token, and which token (by ID) was transferred. This must be able to accept inputs that are both manual as well as from IOT devices as containers of garments may have inputs made all at once as items change ownership from a factory or brand to a retailer who will sell the goods.
+
+Approve: This event is fired when a user approves another user to take ownership of the token, i.e., it is fired whenever approve function is executed. It emits the information on which account currently owns the token, which account is approved to take ownership of the token in the future, and which token (by ID) is approved to have its ownership transferred.
+
+**Function of Physical-Based Tokens**
+
+Unique microchips should be embedded on each physical item. While this is more costly, it will be more difficult to copy or remove than a simple QR code, and thus will be used for high-end items. These microchips, when read by an NFC reader, will display the ownership record for each PBT as well, automatically created but viewable within the user interface.
+
+[RFC 2119: Key words for use in RFCs to Indicate Requirement Levels (rfc-editor.org)](https://www.rfc-editor.org/rfc/rfc2119.html)
+
+**Wallets**
+
+_For users who do not yet have a wallet, this will be downloadable from the App Store, and a scan of the PBT-associated item, with microchip embedded therein, will transfer ownership into that wallet._
+
+**User Interface**
+
+There also must be a user interface developed where companies that are using this system can view specific NFTs and PBTs as well as aggregate data of the NFTs and PBTs being tracked in their respective systems.
