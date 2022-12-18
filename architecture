@@ -8,9 +8,7 @@ Design of the architecture of the Garment Chain. This will include a full archit
 
 **Acceptance criteria: Please enter the specific details on what the deliverable must do to prove this milestone is complete.**
 
-There will be a step-by-step roadmap as well as the document describing how the garment would conceptually be represented on the blockchain and whether it would be represented as
-
-CEP 20 or CEP 47 tokens.
+There will be a step-by-step roadmap as well as the document describing how the garment would conceptually be represented on the blockchain and whether it would be represented as CEP 20 or CEP 47 tokens.
 
 #
 
@@ -19,11 +17,14 @@ CEP 20 or CEP 47 tokens.
 
 We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched in late 2022). These PBTs will be built using composable NFT contracts following the CEP-47 standard, but in later versions may be updated to follow the newer CEP-78 enhanced NFT standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
 
+
 ## Scenario Overview
 
 We have four contracts, the first three are standard CEP-47 NFT contracts to mint from the sources of inputs and the fourth is the user who is assembling items to make a final product NFT, or PBT. If there are more or less inputs, the number of contracts will vary to match the number of inputs to the goods being produced, with the final contract minting a new NFT that assembles them all, a PBT, using those contracts to verify the source. This final contract which is minting a PBT is required to send certain tokens from the first three contracts, then the fourth contract shall verify the ownership of these tokens by the sender (user). If this cannot be verified, the contract will cancel the minting and creates an error message. If it can be verified, the PBT is minted.
 
-# Workflow Chart of Architecture (https://github.com/peterjohnson10/garmentchain/blob/main/Diagram%20showing%20Composable%20NFT%20Process.png)
+
+# Workflow Chart of Architecture 
+![Diagram showing Composable NFT Process](https://user-images.githubusercontent.com/37028677/208316270-2e1c93fe-b91c-46cd-9a32-648e72a6d79b.png)
 
 # Example 1
 
@@ -174,13 +175,15 @@ Composable NFTs
 
 This is one novel part of the project, where we will write a smart contract that allows NFTs to be composable. This is important because in real life cases, the garment is made from many different raw materials. Thus, we will need to be able to create a new NFT contract that allows for the NFTs to be combined into a new generative NFT representing the processed raw material, while still providing the traceability of the components.
 
-https://github.com/peterjohnson10/garmentchain/blob/main/Diagram%202%20showing%20Composable%20NFT%20Process.png
+![Diagram 2 showing Composable NFT Process](https://user-images.githubusercontent.com/37028677/208316380-3ebc8413-7ceb-4c71-bcad-650933df5f5d.png)
+
 
 Final Product NFTs
 
 Final product NFT is the fully manufactured NFT representing an actual product. The main use case for it is to manage the ownership of the product and assert the authentication. While the original raw material NFTs will follow the CEP-47 standard, in the Final Product NFTs will be "Physical Backed Tokens" or PBTs, allowing ownership of the physical product to be tied to ownership of the PBT.
 
-https://github.com/peterjohnson10/garmentchain/blob/main/Diagram%203%20showing%20Composable%20NFT%20Process.png
+![Diagram 3 showing Composable NFT Process](https://user-images.githubusercontent.com/37028677/208316406-cf69f0eb-9481-4467-a7ea-8e6a54d395d5.png)
+
 
 The functions and events to be used must be defined and this is done below. These CEP-78 tokens will have similar to ERC-721 functions and this will make it easier to display simple token information.
 
