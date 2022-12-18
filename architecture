@@ -1,4 +1,4 @@
-# Garment Chain Milestone 2
+### Garment Chain Milestone 2
 
 ## Title of Milestone: Design and Planning of the Garment Chain Architecture
 
@@ -15,34 +15,34 @@ CEP 20 or CEP 47 tokens.
 #
 
 
-# Architecture Design
+## Architecture Design
 
 We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched in late 2022). These PBTs will be built using composable NFT contracts following the CEP-47 standard, but in later versions may be updated to follow the newer CEP-78 enhanced NFT standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
 
-# Scenario Overview
+## Scenario Overview
 
 We have four contracts, the first three are standard CEP-47 NFT contracts to mint from the sources of inputs and the fourth is the user who is assembling items to make a final product NFT, or PBT. If there are more or less inputs, the number of contracts will vary to match the number of inputs to the goods being produced, with the final contract minting a new NFT that assembles them all, a PBT, using those contracts to verify the source. This final contract which is minting a PBT is required to send certain tokens from the first three contracts, then the fourth contract shall verify the ownership of these tokens by the sender (user). If this cannot be verified, the contract will cancel the minting and creates an error message. If it can be verified, the PBT is minted.
 
-##Workflow Chart of Architecture (https://github.com/peterjohnson10/garmentchain/blob/main/Diagram%20showing%20Composable%20NFT%20Process.png)
+# Workflow Chart of Architecture (https://github.com/peterjohnson10/garmentchain/blob/main/Diagram%20showing%20Composable%20NFT%20Process.png)
 
-## Example 1
+# Example 1
 
 We have ¨body parts NFTs¨ and to mint a full body we need to send left and right leg NFTs from leg contract and left and right arm NFTs form an arm contract and head NFTs from head contract. The user wallet should send all the token IDs from the first three contracts to the fourth contract. After that the fourth contract will verify the ownership of those tokens by the sender wallet then mint the whole body NFT.
 
 
-## Example 2
+# Example 2
 
 We make NFTs to mint a PBT of a blue men's formal shirt with a collar and buttons. We have an NFT contract for the source of the fabric this shirt is made from, in this case Egyptian organic cotton from Upper Egypt, near Aswan, Egypt. Another NFT contract is for the indigo used to dye cotton blue. A third is for the sourcing of the buttons, which are from a plastic button producer in Bangladesh. (NOTE: This could be taken a step further, having a composable NFT of the sources of petroleum and other chemicals for the inputs to produce the buttons). An additional NFT contract represents the thread used in sewing the final product, a shirt. A PBT will represent the shirt, which now traces its origins to the four component NFTs which make up this PBT, or composable NFT. Scarabeus Sacer has signed an LOI with Garment Chain, and this is an example based upon their supply chain of how they could implement this project
 
-## Example 3
+# Example 3
 
 A unique one-time design is created by a designer in Tunisia, for a fashion show in London, using a mix of second-hand "upcycled" materials as well as woven fabrics from Mali, where the designer previously lived. One NFT is created for each of the upcycled clothing items to be used for inputs into this batch of goods for the upcoming fashion show, but these items come from a second-hand market in Tunis, arriving as goods donated from a variety of European markets. A standard NFT contract comes for the artisanal fabrics coming from Mali, where small groups of individual weavers have a personal relationship with the Tunisia-based designer, who also wants to be certain consumers know the stories of these female weavers who make the inputs for her clothing items. At the initial stage, second-hand clothing would not yet be traced from Europe, but proof could be given that upcycled / recycled clothing was used in the manufacture of these one -of-a-kind garments, with an NFT contract for each of these inputs. AfroFashion has signed an LOI with Garment Chain, and this is an example based upon their supply chain of how they could implement this project.
 
-## Example 4
+# Example 4
 
 A Berlin-based designer has production in various countries, but with each manufacturing the goods at all one location, including in many cases a single source for inputs, and then items are shipped to a retail boutique in Berlin, to be sold in-person or through ecommerce sales. An example is a black all-cotton clutch bag made by female artisans in Peru. These 100% cotton bags are made from local cotton produced in the valleys of Northern Peru, and the raw cotton becomes thread and is woven into bags by women from these same communities. Therefore, while we can create NFT contracts for the cotton, and then convert this into a PBT, this is an example where the lack of multiple inputs into the product to track reduces the impact of our new system. In the case where there is one input, cotton, all from the same region or even same community, there is less value to a CEP-47 based contracts for inputs, as we could tell the same story in this case with only on NFT contract, and our system of composable NFTs, or PBTs, does not add the same value in this example as it can in the others. Abury has signed an LOI with Garment Chain, and this is an example based upon their supply chain of how this project would apply, or not apply, in one of their supply chains.
 
-## Example 5
+# Example 5
 
 A manufacturer of winter jackets and coats. This use case works better than that of example four because there are multiple components parts, which may be assembled in different points. For example, you may have a polyester shell to the jacket, plastic or metal buttons, plastic or metal zippers, elastic, maybe a draw string of some kind to tighten the hood or waste of the jacket, and some kind of insulation material that fills the inside, such as with a "puffy" winter coat. There also will be the sourcing of threads, dyes, and chemicals used in making and/or waterproofing the garment. In cases of a socially-conscious company like Patagonia, you may also have recycled materials, as they use duck and goose down recycled from old cushions for insulation, where verification of these materials´ "second life" can also be important. In these more complex supply chains, an NFT contract for each of these many components can then be merged into the complete PBT that tells the full story of the sourcing of all the component parts.
 
