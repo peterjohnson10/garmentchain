@@ -23,6 +23,8 @@ We are planning to use NFTs in a novel approach: Composable NFTs and "Physical B
 
 We have four contracts, the first three are standard CEP-47 NFT contracts to mint from the sources of inputs and the fourth is the user who is assembling items to make a final product NFT, or PBT. If there are more or less inputs, the number of contracts will vary to match the number of inputs to the goods being produced, with the final contract minting a new NFT that assembles them all, a PBT, using those contracts to verify the source. This final contract which is minting a PBT is required to send certain tokens from the first three contracts, then the fourth contract shall verify the ownership of these tokens by the sender (user). If this cannot be verified, the contract will cancel the minting and creates an error message. If it can be verified, the PBT is minted.
 
+Workflow Chart of Architecture(https://github.com/peterjohnson10/garmentchain/blob/main/Diagram%20showing%20Composable%20NFT%20Process.png)
+
 ## Example 1
 
 We have ¨body parts NFTs¨ and to mint a full body we need to send left and right leg NFTs from leg contract and left and right arm NFTs form an arm contract and head NFTs from head contract. The user wallet should send all the token IDs from the first three contracts to the fourth contract. After that the fourth contract will verify the ownership of those tokens by the sender wallet then mint the whole body NFT.
