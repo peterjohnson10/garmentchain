@@ -10,7 +10,7 @@ Design of the architecture of the Garment Chain. This will include a full archit
 
 There will be a step-by-step roadmap as well as the document describing how the garment would conceptually be represented on the blockchain and whether it would be represented as
 
-ERC 20 or ERC 721 tokens.
+CEP 20 or CEP 47 tokens.
 
 #
 
