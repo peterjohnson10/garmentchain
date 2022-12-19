@@ -15,15 +15,19 @@ There will be a step-by-step roadmap as well as the document describing how the 
 
 ## Architecture Design
 
-We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched in late 2022). These PBTs will be built using composable NFT contracts following the CEP-47 standard, but in later versions may be updated to follow the newer CEP-78 enhanced NFT standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
+We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched by Azuki in October 2022). These PBTs will be built using composable NFT contracts following the CEP-47 standard, but in later versions may be updated to follow the newer CEP-78 enhanced NFT standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
+
+As we submit new proposals to build what is described here, composable NFTs would be built first, which allow us to have separate NFT contracts representing raw materials and semi-finished inputs being assembled into a good to then assume one NFT for the final product.
+
+A Physical Backed Token, PBT, would come next, creating an easier system to transfer ownership, while at the same time ensuring that physical and digital ownership of a good can no longer be separated.
 
 
-## Scenario Overview
+## Composable NFTs Scenario Overview
 
 We have four contracts, the first three are standard CEP-47 NFT contracts to mint from the sources of inputs and the fourth is the user who is assembling items to make a final product NFT, or PBT. If there are more or less inputs, the number of contracts will vary to match the number of inputs to the goods being produced, with the final contract minting a new NFT that assembles them all, a PBT, using those contracts to verify the source. This final contract which is minting a PBT is required to send certain tokens from the first three contracts, then the fourth contract shall verify the ownership of these tokens by the sender (user). If this cannot be verified, the contract will cancel the minting and creates an error message. If it can be verified, the PBT is minted.
 
 
-# Workflow Chart of Architecture 
+# Workflow Chart of Composable NFT Architecture 
 ![Diagram showing Composable NFT Process](https://user-images.githubusercontent.com/37028677/208316270-2e1c93fe-b91c-46cd-9a32-648e72a6d79b.png)
 
 # Example 1
@@ -55,7 +59,7 @@ A manufacturer of winter jackets and coats. This use case works better than that
 #
 
 
-# Function Explanation
+# Function Explanation for Composable NFTs
 
 During mint the contract try to transfer the required tokens first if the owner doesn't own the NFTs it will throw an error and end the transaction if the wallets do own the required NFTs it transfer them and will mint the PBT to the recipient the transfer done it will mint the NFT to the recipient.
 
@@ -171,19 +175,86 @@ this.networkName,
  } |
 | --- |
 
-Composable NFTs
+# Composable NFTs
 
 This is one novel part of the project, where we will write a smart contract that allows NFTs to be composable. This is important because in real life cases, the garment is made from many different raw materials. Thus, we will need to be able to create a new NFT contract that allows for the NFTs to be combined into a new generative NFT representing the processed raw material, while still providing the traceability of the components.
 
 ![Diagram 2 showing Composable NFT Process](https://user-images.githubusercontent.com/37028677/208316380-3ebc8413-7ceb-4c71-bcad-650933df5f5d.png)
 
 
-Final Product NFTs
+# Final Product NFTs
 
 Final product NFT is the fully manufactured NFT representing an actual product. The main use case for it is to manage the ownership of the product and assert the authentication. While the original raw material NFTs will follow the CEP-47 standard, in the Final Product NFTs will be "Physical Backed Tokens" or PBTs, allowing ownership of the physical product to be tied to ownership of the PBT.
 
 ![Diagram 3 showing Composable NFT Process](https://user-images.githubusercontent.com/37028677/208316406-cf69f0eb-9481-4467-a7ea-8e6a54d395d5.png)
 
+There are already are NFTs that are tied to physical objects, what makes this different?  In most existing projects, the physical product can be separated from the digital product.  
+
+## Example 6 Uniswap´s Unisocks 
+Those who bought Uniswap´s Unisocks, especially at its peak of USD 118,000, are unlikely to ever redeem their token for the actual pair of socks.  The socks and the digital item remain separate from each other, and it is possible that the physical item changes hands but the digital ownership is not transferred.  
+
+With a PBT, the ownership of the token and the physical object cannot be separated.  
+
+## Example 7 Azuki´s Golden Skateboard
+This was created as an Ethereum-backed NFT launched in October 2022 and is closer to what we will model the PBT component of our work upon, with the idea that building this in Casper will be faster and with better functionality than a similar tool built in Ethereum.  
+
+PBTs as planned by the Azuki NFT project (from Japanese Chiru Labs) operate as a new, open-source token standard that ties a physical item to a digital token on Ethereum. It works just like a non-fungible chip (NFC) but with better traceability in a decentralized manner.  An actual chip, specially developed for project, is embedded in the physical item, so that if the object itself is scanned by a mobile phone, ownership of the physical object can be transferred, either through minting a new NFT or transferring an existing NFT to the new owner´s wallet.  There is not a way to transfer digital ownership without the physical object also being present at the same time.  Azuki has developed a non-fungible chip, named Blockchain Enabled Authentication Network Chip (the BEAN chip), which is a physical cryptographic chip that self-generates an asymmetric key pair.  EIP-5791 is proposed based on the concepts coming from the Azuki NFT Project, creating a "scan-to-own" system in which users can have the security and traceability of the blockchain without the need to actually have detailed technical knowledge, fostering wider usability and adoption.  This system additionally expands on decentralization, as a trusted third party is no longer needed to verify authenticity, with the full product history being visible and the physical item and its token being intextricably linked.
+
+The requirements for chips to be designed for the Garment Chain system would be similar to the proposed EIP-5791, including 
+1.The chip can securely generate and store an ECDSA secp256k1 asymmetric key pair;
+2. The chip can sign messages using the private key of the previously-generated asymmetric key pair;
+3. The chip exposes the public key; and
+4. The private key cannot be extracted.
+
+#Interface propòsed to be connected to CEP-47
+interface {
+    /// @notice Returns the token id for a given chip address.
+    /// @dev Throws if there is no existing token for the chip in the collection.
+    /// @param chipAddress The address for the chip embedded in the physical item (computed from the chip's public key).
+    /// @return The token id for the passed in chip address.
+    function tokenIdFor(address chipAddress) external view returns (uint256);
+
+    /// @notice Returns true if the chip for the specified token id is the signer of the signature of the payload.
+    /// @dev Throws if tokenId does not exist in the collection.
+    /// @param tokenId The token id.
+    /// @param payload Arbitrary data that is signed by the chip to produce the signature param.
+    /// @param signature Chip's signature of the passed-in payload.
+    /// @return Whether the signature of the payload was signed by the chip linked to the token id.
+    function isChipSignatureForToken(uint256 tokenId, bytes calldata payload, bytes calldata signature)
+        external
+        view
+        returns (bool);
+
+    /// @notice Transfers the token into the message sender's wallet.
+    /// @param signatureFromChip An EIP-191 signature of (msgSender, blockhash), where blockhash is the block hash for blockNumberUsedInSig.
+    /// @param blockNumberUsedInSig The block number linked to the blockhash signed in signatureFromChip. Should be a recent block number.
+    /// @param useSafeTransferFrom Whether EIP-721's safeTransferFrom should be used in the implementation, instead of transferFrom.
+    ///
+    /// @dev The implementation should check that block number be reasonably recent to avoid replay attacks of stale signatures.
+    /// The implementation should also verify that the address signed in the signature matches msgSender.
+    /// If the address recovered from the signature matches a chip address that's bound to an existing token, the token should be transferred to msgSender.
+    /// If there is no existing token linked to the chip, the function should error.
+    function transferTokenWithChip(
+        bytes calldata signatureFromChip,
+        uint256 blockNumberUsedInSig,
+        bool useSafeTransferFrom
+    ) external;
+
+    /// @notice Calls transferTokenWithChip as defined above, with useSafeTransferFrom set to false.
+    function transferTokenWithChip(bytes calldata signatureFromChip, uint256 blockNumberUsedInSig) external;
+
+    /// @notice Emitted when a token is minted
+    event PBTMint(uint256 indexed tokenId, address indexed chipAddress);
+
+    /// @notice Emitted when a token is mapped to a different chip.
+    /// Chip replacements may be useful in certain scenarios (e.g. chip defect).
+    event PBTChipRemapping(uint256 indexed tokenId, address indexed oldChipAddress, address indexed newChipAddress);
+}
+#
+
+#
+
+#Functions
 
 The functions and events to be used must be defined and this is done below. These CEP-78 tokens will have similar to ERC-721 functions and this will make it easier to display simple token information.
 
@@ -260,8 +331,12 @@ Approve: This event is fired when a user approves another user to take ownership
 **Function of Physical-Based Tokens**
 
 Unique microchips should be embedded on each physical item. While this is more costly, it will be more difficult to copy or remove than a simple QR code, and thus will be used for high-end items. These microchips, when read by an NFC reader, will display the ownership record for each PBT as well, automatically created but viewable within the user interface.
+ 
+#Functions for a minimal interface to be added to CEP-47 NFTs that would allow tokens to be "physically-backed"
 
 [RFC 2119: Key words for use in RFCs to Indicate Requirement Levels (rfc-editor.org)](https://www.rfc-editor.org/rfc/rfc2119.html)
+
+
 
 **Wallets**
 
@@ -269,4 +344,19 @@ _For users who do not yet have a wallet, this will be downloadable from the App 
 
 **User Interface**
 
-There also must be a user interface developed where companies that are using this system can view specific NFTs and PBTs as well as aggregate data of the NFTs and PBTs being tracked in their respective systems.
+There also must be a user interface developed where companies that are using this system can view specific NFTs and PBTs as well as aggregate data of the NFTs and PBTs being tracked in their respective systems.  This will not be a new interface, but rather will involve building an API connects the Garment Chain system to whichever interface a company currently uses to enter and review data.  In the case of an organization not having an existing digital system for its records, we can explore helping them "leapfrog" ahead in using a new system that could be developed for them, or an off-the-shelve solution may be recommended, for which APIs would be built to connect to the Garment Chain system.
+
+## Letters of Intent
+
+The Letters of Intent shown below are from organizations described in the examples above.
+
+#Scarabeus Sacer
+![Letter of Intent with Scarabeus Sacer](https://user-images.githubusercontent.com/FILE TO BE UPLOADED.png)
+
+
+#Abury
+![Letter of Intent with ABury](https://user-images.githubusercontent.com/FILE TO BE UPLOADED.png)
+
+
+#AfroFashion
+![Letter of Intent with AfroFashion](https://user-images.githubusercontent.com/FILE TO BE UPLOADED.png)
