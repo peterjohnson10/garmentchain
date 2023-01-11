@@ -8,6 +8,10 @@ The structure of the DAO governance is approached as a layered system.
 ### DAO Voting and Membership Structure
 This will be a hybrid system between the DEVxDAO, of earning voting rights following an MVPR model (see https://portal.devxdao.com/public-proposals/18), and a "usage model."  In the Usage Model, an organization may be approved to be part of the DAO due to use of the NFT minting system of the DAO in order to prevent counterfeits and trace their supply chains.  DAO members must be approved by a majority vote, but those who mint NFT tokens for more than 10,000 garments will be nominated for a vote. If approved, for each garment for which an NFT token is minted, an organization also will gain reputation points within the DAO.   In order to maintain decentralization, no party may have more than 10% of the overall reputation tokens, even if they mint enough NFT tokens to warrant having a larger stake of DAO voting rights.
 
+The proposals to be voted upon would be developed by the members, and could cover all aspects of regulating the actions taken by the DAO, from funding specific projects to making policy changes in how the DAO operates.
+
+Voting, similar to the DEVxDAO, would first have a phase where at 51% of DAO members must verify they have read through the proposal (based upon voting weight of voters, not absolute number of voters).  There would then be five days for an informal vote, and if approved, voting members of the DAO could stake reputation on the position they plan to take on a vote and a final vote would take place, following the pattern of the DEVxDAO.
+
 ### DAO: Traceability and decentralization
 
 Due to the rising issue of counterfeiting, countries including the U.S., Italy and France are among the hardest hit, as their economies thrive on producing high-value fashion products, protected by intellectual property rights and trademarks.
@@ -23,9 +27,10 @@ Incentivizing parties in a supply chain to participate in a DAO can be a challen
 -Long-term benefits: Participating in a DAO can lead to increased efficiency, reduced costs, and improved transparency in the supply chain, which can provide long-term benefits for all participants.
 
 It's worth noting that, the success of these incentives depend on how well they are communicated, and whether they are perceived as fair and valuable by the actors. It may require a combination of these incentives and others that may apply to specific industries to incentivize adoption and to build a sustainable system.
+
 ### Proposed members: Producers, distributors, and  retailers
 
-The usage of our solution by producers is a first, pivotal step in a successful and optimal tracing of the product and its journey. The idea is to train both the producers of the raw materials (such as cotton, linen, dye, zippers), and companies that produce finished goods (sewing factories, dying factories, design studios) to scan the code of the fashion product. Only by reaching the earliest staged of the production, a full cycle can be reached.
+The usage of our solution by producers is a first, pivotal step in a successful and optimal tracing of the product and its journey. The idea is to train both the producers of the raw materials (such as cotton, linen, dye, zippers), and companies that produce finished goods (sewing factories, dying factories, design studios) to scan the fashion product (NOTE:  An earlier version of this referred to scanning the code of the product, but as we now plan to use "Physical-Based Tokens" there is no code to scan, the actual item itself will be scanned, as explained in Milestone 2). Only by reaching the earliest staged of the production, a full cycle can be reached.
 
 Furthermore, the role of distributors and their entering data about products is a vital part in the supply chain. Because of the globalized outreach of distribution companies, the ability to track the progress of the goods in this stage must be ensured. Indeed, during the transportation and distribution stages, due to the sheer volume of goods moved, there is a great risk for counterfeiting and wrong products being delivered. The focus would be for example on global freight, but also cargo companies including, but not limited to FedEx, UPS, USPS, DHL, Maersk, Deutsche Post, DB Schenker, GLS, or the Royal Mail.
 
