@@ -206,8 +206,10 @@ The requirements for chips to be designed for the Garment Chain system would be 
 3. The chip exposes the public key; and
 4. The private key cannot be extracted.
 
-#The chart below, from the 2018 Crypto Copycat paper by Elmessiry & Elmessiry, illustrates who the parties are who could be entering data for these composable NFTs.
-![Crypt CopyCat 2018](https://user-images.githubusercontent.com/FILE TO BE UPLOADED.png)
+#The chart below, from the 2018 Crypto Copycat paper by 
+
+& Elmessiry, illustrates who the parties are who could be entering data for these composable NFTs.
+![Crypt CopyCat 2018](https://github.com/peterjohnson10/garmentchain/blob/main/Chart%20of%20Garment%20%20Supply%20Chain%20-%20from%20CryptoCopyCat%20Paper%20by%20Messiry%20and%20Messiry.jpg)
 
 The system below expands beyond what was possible in the 2018 Crypto Copycat paper, which was based on using hashes as a way to record data.
 
