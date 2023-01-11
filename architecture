@@ -256,7 +256,7 @@ interface {
 
 #Functions
 
-The functions and events to be used must be defined and this is done below. These CEP-78 tokens will have similar to ERC-721 functions and this will make it easier to display simple token information.
+The functions and events to be used must be defined and this is done below. These CEP-47, or possibly later CEP-78 tokens will have similar to ERC-721 functions and this will make it easier to display simple token information.
 
 **List of Functions Related to Composable NFTs:**
 
@@ -340,11 +340,13 @@ Unique microchips should be embedded on each physical item. While this is more c
 
 **Wallets**
 
-_For users who do not yet have a wallet, this will be downloadable from the App Store, and a scan of the PBT-associated item, with microchip embedded therein, will transfer ownership into that wallet._
+For users who do not yet have a wallet, this will be downloadable from the App Store, and a scan of the PBT-associated item, with microchip embedded therein, will transfer ownership into that wallet._
+
 
 **User Interface**
 
 There also must be a user interface developed where companies that are using this system can view specific NFTs and PBTs as well as aggregate data of the NFTs and PBTs being tracked in their respective systems.  This will not be a new interface, but rather will involve building an API connects the Garment Chain system to whichever interface a company currently uses to enter and review data.  In the case of an organization not having an existing digital system for its records, we can explore helping them "leapfrog" ahead in using a new system that could be developed for them, or an off-the-shelve solution may be recommended, for which APIs would be built to connect to the Garment Chain system.
+
 
 ## Letters of Intent
 
@@ -360,3 +362,7 @@ The Letters of Intent shown below are from organizations described in the exampl
 
 #AfroFashion
 ![Letter of Intent with AfroFashion](https://user-images.githubusercontent.com/FILE TO BE UPLOADED.png)
+
+
+#GITEC-IGIP Consulting Group 
+![Letter of Intent with GITEC-IGIP Consulting Group](https://user-images.githubusercontent.com/FILE TO BE UPLOADED.png)
