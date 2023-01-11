@@ -206,6 +206,11 @@ The requirements for chips to be designed for the Garment Chain system would be 
 3. The chip exposes the public key; and
 4. The private key cannot be extracted.
 
+#The chart below, from the 2018 Crypto Copycat paper by Elmessiry & Elmessiry, illustrates who the parties are who could be entering data for these composable NFTs.
+![Crypt CopyCat 2018](https://user-images.githubusercontent.com/FILE TO BE UPLOADED.png)
+
+The system below expands beyond what was possible in the 2018 Crypto Copycat paper, which was based on using hashes as a way to record data.
+
 #Interface propòsed to be connected to CEP-47
 interface {
     /// @notice Returns the token id for a given chip address.
