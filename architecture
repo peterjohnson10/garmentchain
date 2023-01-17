@@ -15,7 +15,7 @@ There will be a step-by-step roadmap as well as the document describing how the 
 
 ## Architecture Design
 
-We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched by Azuki in October 2022). These PBTs will be built using composable NFT contracts following the CEP-47 standard, but in later versions may be updated to follow the newer CEP-78 enhanced NFT standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
+We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched by Azuki in October 2022). These PBTs will be built using composable NFT contracts following the CEP-78 standard, which replaces the depreciated CEP-47 standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
 
 As we submit new proposals to build what is described here, composable NFTs would be built first, which allow us to have separate NFT contracts representing raw materials and semi-finished inputs being assembled into a good to then assume one NFT for the final product.
 
@@ -24,7 +24,7 @@ A Physical Backed Token, PBT, would come next, creating an easier system to tran
 
 ## Composable NFTs Scenario Overview
 
-We have four contracts, the first three are standard CEP-47 NFT contracts to mint from the sources of inputs and the fourth is the user who is assembling items to make a final product NFT, or PBT. If there are more or less inputs, the number of contracts will vary to match the number of inputs to the goods being produced, with the final contract minting a new NFT that assembles them all, a PBT, using those contracts to verify the source. This final contract which is minting a PBT is required to send certain tokens from the first three contracts, then the fourth contract shall verify the ownership of these tokens by the sender (user). If this cannot be verified, the contract will cancel the minting and creates an error message. If it can be verified, the PBT is minted.
+We have four contracts, the first three are standard CEP-78 NFT contracts to mint from the sources of inputs and the fourth is the user who is assembling items to make a final product NFT, or PBT. If there are more or less inputs, the number of contracts will vary to match the number of inputs to the goods being produced, with the final contract minting a new NFT that assembles them all, a PBT, using those contracts to verify the source. This final contract which is minting a PBT is required to send certain tokens from the first three contracts, then the fourth contract shall verify the ownership of these tokens by the sender (user). If this cannot be verified, the contract will cancel the minting and creates an error message. If it can be verified, the PBT is minted.
 
 
 # Workflow Chart of Composable NFT Architecture 
@@ -110,7 +110,7 @@ let profile\_contract\_hash3: ContractHash =
 
 Client connection:
 
-CEP-47 client parameters:
+CEP-78 client parameters:
 
 Recipient1: NFT's owner(s)
 
@@ -184,7 +184,7 @@ This is one novel part of the project, where we will write a smart contract that
 
 # Final Product NFTs
 
-Final product NFT is the fully manufactured NFT representing an actual product. The main use case for it is to manage the ownership of the product and assert the authentication. While the original raw material NFTs will follow the CEP-47 standard, in the Final Product NFTs will be "Physical Backed Tokens" or PBTs, allowing ownership of the physical product to be tied to ownership of the PBT.
+Final product NFT is the fully manufactured NFT representing an actual product. The main use case for it is to manage the ownership of the product and assert the authentication. While the original raw material NFTs will follow the CEP-78 standard, in the Final Product NFTs will be "Physical Backed Tokens" or PBTs, allowing ownership of the physical product to be tied to ownership of the PBT.
 
 ![Diagram 3 showing Composable NFT Process](https://user-images.githubusercontent.com/37028677/208316406-cf69f0eb-9481-4467-a7ea-8e6a54d395d5.png)
 
@@ -213,7 +213,7 @@ The requirements for chips to be designed for the Garment Chain system would be 
 
 The system below expands beyond what was possible in the 2018 Crypto Copycat paper, which was based on using hashes as a way to record data.
 
-#Interface propòsed to be connected to CEP-47
+#Interface propòsed to be connected to CEP-78
 interface {
     /// @notice Returns the token id for a given chip address.
     /// @dev Throws if there is no existing token for the chip in the collection.
@@ -263,7 +263,7 @@ interface {
 
 #Functions
 
-The functions and events to be used must be defined and this is done below. These CEP-47, or possibly later CEP-78 tokens will have similar to ERC-721 functions and this will make it easier to display simple token information.
+The functions and events to be used must be defined and this is done below. These CEP-78 tokens will have function similar to ERC-721 tokens and this will make it easier to display simple token information.
 
 **List of Functions Related to Composable NFTs:**
 
@@ -303,7 +303,7 @@ mint\_Final Product
 
 Transfer\_Final Product
 
-This is basically the sales process. Allowing the current owner to transfer the NFT to the new owner.
+This is the sales process. Allowing the current owner to transfer the NFT to the new owner.
 
 name: Used to define the token's name, which other contracts and applications can identify. We will use the name GARM, which will also be its shorthand name or symbol.
 
