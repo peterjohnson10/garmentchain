@@ -15,7 +15,7 @@ There will be a step-by-step roadmap as well as the document describing how the 
 
 ## Architecture Design
 
-We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched by Azuki in October 2022). These PBTs will be built using composable NFT contracts following the CEP-78 standard, which replaces the depreciated CEP-47 standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
+We are planning to use NFTs in a novel approach: Composable NFTs and "Physical Backed Tokens," or PBTs (essentially final products, and similar to the "golden skateboard" PBTs launched by Azuki in October 2022). These PBTs will be built using composable NFT contracts following the CEP-78 standard, which replaces the deprecated CEP-47 standard, with a minimal interface added, similar to that which EIP-5791 proposes to bring to ERC-721 tokens. PBTs will be "physically backed" and owned by whoever owns the NFT's physical counterpart.
 
 As we submit new proposals to build what is described here, composable NFTs would be built first, which allow us to have separate NFT contracts representing raw materials and semi-finished inputs being assembled into a good to then assume one NFT for the final product.
 
@@ -201,14 +201,12 @@ This was created as an Ethereum-backed NFT launched in October 2022 and is close
 PBTs as planned by the Azuki NFT project (from Japanese Chiru Labs) operate as a new, open-source token standard that ties a physical item to a digital token on Ethereum. It works just like a non-fungible chip (NFC) but with better traceability in a decentralized manner.  An actual chip, specially developed for project, is embedded in the physical item, so that if the object itself is scanned by a mobile phone, ownership of the physical object can be transferred, either through minting a new NFT or transferring an existing NFT to the new owner´s wallet.  There is not a way to transfer digital ownership without the physical object also being present at the same time.  Azuki has developed a non-fungible chip, named Blockchain Enabled Authentication Network Chip (the BEAN chip), which is a physical cryptographic chip that self-generates an asymmetric key pair.  EIP-5791 is proposed based on the concepts coming from the Azuki NFT Project, creating a "scan-to-own" system in which users can have the security and traceability of the blockchain without the need to actually have detailed technical knowledge, fostering wider usability and adoption.  This system additionally expands on decentralization, as a trusted third party is no longer needed to verify authenticity, with the full product history being visible and the physical item and its token being intextricably linked.
 
 The requirements for chips to be designed for the Garment Chain system would be similar to the proposed EIP-5791, including 
-1.The chip can securely generate and store an ECDSA secp256k1 asymmetric key pair;
+1. The chip can securely generate and store an ECDSA secp256k1 asymmetric key pair;
 2. The chip can sign messages using the private key of the previously-generated asymmetric key pair;
 3. The chip exposes the public key; and
 4. The private key cannot be extracted.
 
-#The chart below, from the 2018 Crypto Copycat paper by 
-
-& Elmessiry, illustrates who the parties are who could be entering data for these composable NFTs.
+#The chart below, from the 2018 Crypto Copycat paper by Elmessiry & Elmessiry, illustrates who the parties are who could be entering data for these composable NFTs.
 ![Crypt CopyCat 2018](https://github.com/peterjohnson10/garmentchain/blob/main/Chart%20of%20Garment%20%20Supply%20Chain%20-%20from%20CryptoCopyCat%20Paper%20by%20Messiry%20and%20Messiry.jpg)
 
 The system below expands beyond what was possible in the 2018 Crypto Copycat paper, which was based on using hashes as a way to record data.
@@ -347,7 +345,7 @@ Unique microchips should be embedded on each physical item. While this is more c
 
 **Wallets**
 
-For users who do not yet have a wallet, this will be downloadable from the App Store, and a scan of the PBT-associated item, with microchip embedded therein, will transfer ownership into that wallet._
+For users who do not yet have a wallet, this will be downloadable from the App Store or Play Store, and a scan of the PBT-associated item, with microchip embedded therein, will transfer ownership into that wallet._
 
 
 **User Interface**
