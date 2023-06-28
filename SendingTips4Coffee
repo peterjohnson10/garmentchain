@@ -1,0 +1,24 @@
+# Coffee Supply Chain
+
+This code implements a Rust-based coffee supply chain system. The system allows for creating a digital ID and wallet for each worker in the supply chain and for consumers to be able to send a tip to the wallet of any workers who has been part of the production of a garment they now own.
+
+## Functions
+
+The following functions are implemented in the code:
+
+* `createDigitalID()`: Creates a digital ID for a worker.
+* `tipWorker()`: Sends a tip to the wallet of a worker.
+
+## Usage
+
+To use the code, you will need to:
+
+1. Install the `web3` package.
+2. Create a Web3 instance.
+3. Create a contract instance for the CoffeeSupplyChain contract.
+4. Call the desired functions on the contract instance.
+
+For example, to create a digital ID for a worker, you would call the `createDigitalID()` function:
+
+```rust
+let digital_id = CoffeeSupplyChain::create_digital_id(&contract, wallet_address);
